@@ -15,6 +15,7 @@ for uploaded_file in uploaded_files:
     # print(type(uploaded_file.name))
     if uploaded_file and  keywords is not None:
         reader = PdfReader(uploaded_file)
+        # print(uploaded_file.name)
 
 # print(title)
         num_of_pages = len(reader.pages)
@@ -41,9 +42,13 @@ for uploaded_file in uploaded_files:
 
             comb_pdf_list.append(flat_list)
             information = reader.metadata
-            if len(information.title) > 30:
-                title.append(information.title)
-            else:
+            # print(information.title)
+            try:
+                if len(information.title) > 30:
+                    title.append(information.title)
+                else:
+                    title.append(uploaded_file.name)
+            except:
                 title.append(uploaded_file.name)
         else:
             # information = reader.metadata
@@ -188,7 +193,7 @@ for elem in range(len(Input_string)):
         if len_temp[elem] - len_temp[elem - 1] == 0 or flag == 0:
             print('first if')
             ind_abs3 = g5_list[elem].index(heading_list[elem][0])
-            ind_abs4 = g5_list[elem].index(heading_list[elem][2])
+            ind_abs4 = g5_list[elem].index(heading_list[elem][1])###############
             abs = g5_list[elem][ind_abs3:ind_abs4]
             # print(abs)
             abs1 = ' '.join(abs)
